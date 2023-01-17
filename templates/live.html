@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block app_content %}
+<a href="/" class="btn btn-warning home">На главную</a>
+<a href="/live" class="btn btn-info refresh">Создать новую жизнь</a>
+
+<div class="counter">{{ gof.counter }}</div>
+
+<table class="world">
+    {% for i in range(25) %}
+        <tr>
+            {% for j in range(25) %}
+                {% if gof.world[i][j] == 1 %}
+                    <td class="cell living-cell"></td>
+                {% elif gof.world[i][j] == 0 and gof.old_world[i][j] == 1  %}
+                    <td class="cell dead-cell"></td>
+                {% else %}
+                    <td class="cell"></td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+<script>
+    setInterval(() => window.location.reload(), 1000);
+</script>
+{% endblock %}
